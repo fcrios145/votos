@@ -11,9 +11,12 @@
 	</head>
 	<body>
 		<h1 class="text-center">Votaciones</h1>
-        <a href="/registro">Registro</a>
-        <a href="/votar">Votar</a>
-        <a href="{% url 'social:begin' 'google-oauth2' %}">Entrar con la cuenta de Google</a>
+        <a href="/registro">Registro</a><br/>
+        <a href="/votar">Votar</a><br/>
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Entrar con la cuenta de Google</a><br/>
+        <a href="/salir">Salir</a><br/>
+        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+        <h1>{{ user.first_name }}</h1>
 		<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->

@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
 
-from .views import Home, Registro
+from .views import Home, Registro, Logout
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^$', Home.as_view(), name='home'),
     url(r'^registro$', Registro.as_view(), name='registro'),
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^salir/', Logout.as_view(), name='logout'),
 
 
 )

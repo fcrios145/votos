@@ -162,15 +162,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Social AUTH
 AUTHENTICATION_BACKENDS = (
-      'social.backends.open_id.OpenIdAuth',
-      'social.backends.google.GoogleOpenId',
-      'social.backends.google.GoogleOAuth2',
-      'social.backends.google.GoogleOAuth',
-      'django.contrib.auth.backends.ModelBackend',
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.email.EmailAuth',
+    'django.contrib.auth.backends.ModelBackend',
 )
+
+SOCIAL_AUTH_FACEBOOK_KEY = '282735098571281'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'dbdab30bb4f5fa2474fc22415e3ef49c'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '833035513904-scg4i5jjd7dit3f7ha41a7c5vmt9he7p.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '3NdlFkw-TMtMdL15RJrxRT7h'
+
+WHITELISTED_DOMAINS = ['upsin.edu.mx']
 
 
 SOCIAL_AUTH_PIPELINE = (
@@ -178,16 +185,10 @@ SOCIAL_AUTH_PIPELINE = (
 'social.pipeline.social_auth.social_details',
 'social.pipeline.social_auth.social_uid',
 'social.pipeline.social_auth.auth_allowed',
-
 'social.pipeline.social_auth.social_user',
-
 'social.pipeline.user.get_username',
-
 'social.pipeline.user.create_user',
-
 'social.pipeline.social_auth.associate_user',
-
 'social.pipeline.social_auth.load_extra_data',
-
 'social.pipeline.user.user_details',
 )
