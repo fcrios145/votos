@@ -34,7 +34,7 @@ SECRET_KEY = use_keys['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_OPENSHIFT:
-     DEBUG = True
+     DEBUG = False
 else:
      DEBUG = True
 
@@ -169,9 +169,9 @@ AUTHENTICATION_BACKENDS = (
       'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1076757286907-pmheruf0b3pr2r521qoekkli1edcu89h.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'OmSGq7SWOh1b5if4HnX5hRy-'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '833035513904-scg4i5jjd7dit3f7ha41a7c5vmt9he7p.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '3NdlFkw-TMtMdL15RJrxRT7h'
+
 
 SOCIAL_AUTH_PIPELINE = (
 
