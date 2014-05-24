@@ -34,7 +34,7 @@ SECRET_KEY = use_keys['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_OPENSHIFT:
-     DEBUG = False
+     DEBUG = True
 else:
      DEBUG = True
 
@@ -171,3 +171,23 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1076757286907-pmheruf0b3pr2r521qoekkli1edcu89h.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'OmSGq7SWOh1b5if4HnX5hRy-'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_PIPELINE = (
+
+'social.pipeline.social_auth.social_details',
+'social.pipeline.social_auth.social_uid',
+'social.pipeline.social_auth.auth_allowed',
+
+'social.pipeline.social_auth.social_user',
+
+'social.pipeline.user.get_username',
+
+'social.pipeline.user.create_user',
+
+'social.pipeline.social_auth.associate_user',
+
+'social.pipeline.social_auth.load_extra_data',
+
+'social.pipeline.user.user_details',
+)
