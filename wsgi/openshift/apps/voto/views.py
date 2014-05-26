@@ -1,4 +1,5 @@
-from django.shortcuts import render, render_to_response
+from django.http import HttpResponse
+from django.shortcuts import redirect
 
 # Create your views here.
 from django.views.generic import TemplateView, FormView
@@ -22,6 +23,5 @@ class Logout(TemplateView):
     template_name = 'home/home.html'
     def get(self, request, *args, **kwargs):
         """Logs out user"""
-        print "hola"
         auth_logout(request)
-        return render_to_response('home/home.html')
+        return redirect('https://accounts.google.com/Logout?hl=es&continue=https://www.google.com.mx/')

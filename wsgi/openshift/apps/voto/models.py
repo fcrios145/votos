@@ -23,3 +23,4 @@ class Participante(Base):
     foto = models.ImageField(upload_to='participantes')
     def __unicode__(self):
         return self.matricula
+
