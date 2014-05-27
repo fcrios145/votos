@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<title>Registro</title>
-		<meta charset="UTF-8">
-		<meta name=description content="">
-		<meta name=viewport content="width=device-width, initial-scale=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- Bootstrap CSS -->
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	</head>
-	<body>
-		<h1 class="text-center">Registro</h1>
+<head>
+    <title>Registro</title>
+    <meta charset="UTF-8">
+    <meta name=description content="">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<h1 class="text-center">Registro</h1>
 
-        <form method="POST">{% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Registrarse"/>
-        </form>
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <tr>
+    <th><label for="id_matricula">Matricula:</label></th>
+    <td><input hidden="hidden" value="{{ user.email|cut:"@upsin.edu.mx" }}" id="id_matricula" maxlength="32" name="matricula" type="text"/></td>
+    </tr>
+    <tr>
+        <th><label for="id_foto">Foto:</label></th>
+        <td><input id="id_foto" name="foto" type="file"/></td>
+    </tr>
+    <tr>
+        <th><label hidden="hidden" for="id_correo">Correo:</label></th>
+        <td><input hidden="hidden" value="{{ user.email }}" id="id_correo" maxlength="75" name="correo" type="email"/></td>
+    </tr>
+    <tr>
+        <th><label hidden="hidden" for="id_nombre">Nombre:</label></th>
+        <td><input hidden="hidden" value="{{ user.first_name }} {{ user.last_name }}" id="id_nombre" maxlength="64" name="nombre" type="text"/></td>
+    </tr>
+    {{ form.errors }}
+    <input type="submit" value="Registrarse"/>
+</form>
 
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-	</body>
+
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- Bootstrap JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+</body>
 </html>

@@ -1,10 +1,11 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import render_to_response
 
 # Create your views here.
-from django.views.generic import TemplateView, FormView
-from .forms import FormPersona
-from django.contrib.auth import logout as auth_logout
+from django.views.generic import TemplateView, FormView, ListView
+from django.contrib.auth import logout
+from .forms import FormParticipante
+from .models import Participante
+
 
 class Home (TemplateView):
     template_name = 'home/home.html'
@@ -12,16 +13,22 @@ class Home (TemplateView):
 
 class Registro(FormView):
     template_name = 'home/registro.html'
-    success_url = 'registro'
-    form_class = FormPersona
+    success_url = '/'
+    form_class = FormParticipante
 
     def form_valid(self, form):
         form.save()
         return super(Registro, self).form_valid(form)
 
+
 class Logout(TemplateView):
     template_name = 'home/home.html'
     def get(self, request, *args, **kwargs):
-        """Logs out user"""
-        auth_logout(request)
-        return redirect('https://accounts.google.com/Logout?hl=es&continue=https://www.google.com.mx/')
+        logout(request)
+        return render_to_response('home/home.html')
+        # return redirect('https://accounts.google.com/Logout?hl=es&continue=https://www.google.com.mx/')
+
+class Votar(ListView):
+    template_name = 'home/votar.html'
+    model = Participante
+    context_object_name = 'participantes'
