@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^registro$', Registro.as_view(), name='registro'),
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
     url(r'^salir/', Logout.as_view(), name='logout'),
-    url(r'^votar/', Votar.as_view(), name='votar'),
+    url(r'^votar', Votar.as_view(), name='votar'),
 
 
 )
