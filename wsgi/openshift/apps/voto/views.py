@@ -16,6 +16,7 @@ class Registro(FormView):
     success_url = '/'
     form_class = FormParticipante
 
+
     def form_valid(self, form):
         form.save()
         return super(Registro, self).form_valid(form)
