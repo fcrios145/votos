@@ -14,8 +14,9 @@
 
 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
     <tr>
-    <th><label for="id_matricula">Matricula:</label></th>
-    <td><input hidden="hidden" value="{{ user.email|cut:"@upsin.edu.mx" }}" id="id_matricula" maxlength="32" name="matricula" type="text"/></td>
+        <th><label for="id_matricula">Matricula:</label></th>
+        <td><input hidden="hidden" value="{{ user.email|cut:"@upsin.edu.mx" }}" id="id_matricula" maxlength="32"
+                   name="matricula" type="text"/></td>
     </tr>
     <tr>
         <th><label for="id_foto">Foto:</label></th>
@@ -23,16 +24,26 @@
     </tr>
     <tr>
         <th><label hidden="hidden" for="id_correo">Correo:</label></th>
-        <td><input hidden="hidden" value="{{ user.email }}" id="id_correo" maxlength="75" name="correo" type="email"/></td>
+        <td><input hidden="hidden" value="{{ user.email }}" id="id_correo" maxlength="75" name="correo" type="email"/>
+        </td>
     </tr>
     <tr>
         <th><label hidden="hidden" for="id_nombre">Nombre:</label></th>
-        <td><input hidden="hidden" value="{{ user.first_name }} {{ user.last_name }}" id="id_nombre" maxlength="64" name="nombre" type="text"/></td>
+        <td><input hidden="hidden" value="{{ user.first_name }} {{ user.last_name }}" id="id_nombre" maxlength="64"
+                   name="nombre" type="text"/></td>
+    </tr>
+    <tr>
+        <th><label for="id_sexo">Sexo:</label></th>
+        <td>
+            <select id="id_sexo" name="sexo">
+                <option value="" selected="selected">---------</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+            </select></td>
     </tr>
     {{ form.errors }}
     <input type="submit" value="Registrarse"/>
 </form>
-
 
 
 <!-- jQuery -->

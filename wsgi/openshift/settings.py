@@ -10,6 +10,12 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import imp
+import datetime
+from datetime import datetime as dt
+
+diaActual = datetime.datetime.now()
+activar = dt.strptime("05/28/14", "%m/%d/%y")
+VOTAR = False
 
 ON_OPENSHIFT = False
 if os.environ.has_key('OPENSHIFT_REPO_DIR'):
@@ -76,6 +82,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 # If you want configure the REDISCLOUD
@@ -172,11 +179,16 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_FACEBOOK_KEY = '282735098571281'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'dbdab30bb4f5fa2474fc22415e3ef49c'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/registro'
-
+if diaActual > activar:
+    SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/votar'
+    VOTAR = True
+else:
+    SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/registro'
+    VOTAR = False
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '833035513904-scg4i5jjd7dit3f7ha41a7c5vmt9he7p.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '3NdlFkw-TMtMdL15RJrxRT7h'
@@ -196,3 +208,5 @@ SOCIAL_AUTH_PIPELINE = (
 'social.pipeline.social_auth.load_extra_data',
 'social.pipeline.user.user_details',
 )
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
