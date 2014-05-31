@@ -37,6 +37,10 @@ class Registro(FormView):
         form.save()
         return super(Registro, self).form_valid(form)
 
+    @method_decorator(login_required(login_url='/social/login/google-oauth2/'))
+    def dispatch(self, *args, **kwargs):
+        return super(Registro, self).dispatch(*args, **kwargs)
+
 
 class Logout(TemplateView):
     template_name = 'home/home.html'
@@ -73,6 +77,7 @@ class Votar(ListView):
         votos.candidatos.add(candidatoHombre)
         votos.candidatos.add(candidatoMujer)
         votos.save()
+        messages.add_message(request, messages.INFO, 'Voto Registrado')
         return redirect('/')
         # return render_to_response('home/home.html')
 
