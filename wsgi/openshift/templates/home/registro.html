@@ -1,54 +1,129 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <title>Registro</title>
-    <meta charset="UTF-8">
-    <meta name=description content="">
-    <meta name=viewport content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
-<h1 class="text-center">Registro</h1>
+{% extends 'home/base.html' %}
 
-<form method="POST" enctype="multipart/form-data">{% csrf_token %}
-    <tr>
-        <th><label for="id_matricula">Matricula:</label></th>
-        <td><input hidden="hidden" value="{{ user.email|cut:"@upsin.edu.mx" }}" id="id_matricula" maxlength="32"
-                   name="matricula" type="text"/></td>
-    </tr>
-    <tr>
-        <th><label for="id_foto">Foto:</label></th>
-        <td><input id="id_foto" name="foto" type="file"/></td>
-    </tr>
-    <tr>
-        <th><label hidden="hidden" for="id_correo">Correo:</label></th>
-        <td><input hidden="hidden" value="{{ user.email }}" id="id_correo" maxlength="75" name="correo" type="email"/>
-        </td>
-    </tr>
-    <tr>
-        <th><label hidden="hidden" for="id_nombre">Nombre:</label></th>
-        <td><input hidden="hidden" value="{{ user.first_name }} {{ user.last_name }}" id="id_nombre" maxlength="64"
-                   name="nombre" type="text"/></td>
-    </tr>
-    <tr>
-        <th><label for="id_sexo">Sexo:</label></th>
-        <td>
-            <select id="id_sexo" name="sexo">
-                <option value="" selected="selected">---------</option>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-            </select></td>
-    </tr>
-    {{ form.errors }}
-    <input type="submit" value="Registrarse"/>
-</form>
+{% block title %}
+    Registro
+{% endblock %}
 
 
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery.js"></script>
-<!-- Bootstrap JavaScript -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% block contenido %}
+    <form class="form-horizontal" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <br/><br/>
+{#        <tr>#}
+{#            <th><label for="id_matricula">Matricula:</label></th>#}
+{#            <td><input hidden="hidden" value="{{ user.email|cut:"@upsin.edu.mx" }}" id="id_matricula" maxlength="32"#}
+{#                       name="matricula" type="text"/></td>#}
+{#        </tr>#}
+
+        <div class="form-group">
+            <label for="id_matricula" class="col-sm-2 control-label">Matricula</label>
+            <div class="col-sm-10">
+                <input readonly value="{{ user.email|cut:"@upsin.edu.mx" }}" id="id_matricula" name="matricula" type="text" class="form-control"/>
+            </div>
+        </div>
+
+{#        <tr>#}
+{#            <th><label for="id_foto">Foto:</label></th>#}
+{#            <td><input id="id_foto" name="foto" type="file"/></td>#}
+{#        </tr>#}
+
+        {% comment %}Foto{% endcomment %}
+
+{#        <tr>#}
+{#            <th><label hidden="hidden" for="id_correo">Correo:</label></th>#}
+{#            <td><input hidden="hidden" value="{{ user.email }}" id="id_correo" maxlength="75" name="correo"#}
+{#                       type="email"/>#}
+{#            </td>#}
+{#        </tr>#}
+
+        <div class="form-group">
+            <label for="id_correo" class="col-sm-2 control-label">Correo</label>
+            <div class="col-sm-10">
+                <input readonly value="{{ user.email }}" id="id_correo" name="correo" type="email" class="form-control"/>
+            </div>
+        </div>
+
+
+
+{#        <tr>#}
+{#            <th><label hidden="hidden" for="id_nombre">Nombre:</label></th>#}
+{#            <td><input hidden="hidden" value="{{ user.first_name }} {{ user.last_name }}" id="id_nombre" maxlength="64"#}
+{#                       name="nombre" type="text"/></td>#}
+{#        </tr>#}
+
+
+        <div class="form-group">
+            <label for="id_nombre" class="col-sm-2 control-label">Nombre</label>
+            <div class="col-sm-10">
+                <input readonly value="{{ user.first_name }} {{ user.last_name }}" id="id_nombre" name="nombre" type="text" class="form-control"/>
+            </div>
+        </div>
+
+
+{#        <tr>#}
+{#            <th><label for="id_sexo">Sexo:</label></th>#}
+{#            <td>#}
+{#                <select id="id_sexo" name="sexo">#}
+{#                    <option value="" selected="selected">---------</option>#}
+{#                    <option value="masculino">Masculino</option>#}
+{#                    <option value="femenino">Femenino</option>#}
+{#                </select></td>#}
+{#        </tr>#}
+{#        </select></td></tr>#}
+
+        <div class="form-group">
+            <label for="id_sexo" class="col-sm-2 control-label">Sexo</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="id_sexo" name="sexo">
+                    <option value="" selected="selected">---------</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                </select>
+                {{ form.errors.sexo }}
+            </div>
+        </div>
+
+
+{#        <tr>#}
+{#            <th><label for="id_carreras">Carreras:</label></th>#}
+{#            <td><select id="id_carreras" name="carreras">#}
+{#                <option value="" selected="selected">---------</option>#}
+{#                <option value="informatica">Ing. En Informatica</option>#}
+{#                <option value="mecatronica">Ing. En Mecatronica</option>#}
+{#                <option value="biotecnologia">Ing. En Biotecnologia</option>#}
+{#                <option value="terapia fisica">Lic. Terapia Fisica</option>#}
+{#                <option value="ambiental">Ing. Tecnologia Ambiental</option>#}
+{#                <option value="biomedica">Ing. Biomedica</option>#}
+{#                <option value="logistica">Ing. Logistica y transporte</option>#}
+{#                <option value="energia">Ing. En Energia</option>#}
+{#            </select></td>#}
+{#        </tr>#}
+
+        <div class="form-group">
+            <label for="id_carreras" class="col-sm-2 control-label">Carrera</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="id_carreras" name="carreras">
+                    <option value="" selected="selected">---------</option>
+                    <option value="informatica">Ing. En Informatica</option>
+                    <option value="mecatronica">Ing. En Mecatronica</option>
+                    <option value="biotecnologia">Ing. En Biotecnologia</option>
+                    <option value="terapia fisica">Lic. Terapia Fisica</option>
+                    <option value="ambiental">Ing. Tecnologia Ambiental</option>
+                    <option value="biomedica">Ing. Biomedica</option>
+                    <option value="logistica">Ing. Logistica y transporte</option>
+                    <option value="energia">Ing. En Energia</option>
+                </select>
+                {{ form.errors.carreras }}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Registrarse</button>
+            </div>
+        </div>
+{#        <input type="submit" value="Registrarse"/>#}
+    </form>
+
+
+{% endblock %}
