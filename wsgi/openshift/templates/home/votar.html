@@ -4,6 +4,10 @@
     Votacion
 {% endblock %}
 
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}js/main.js"></script>
+{% endblock %}
+
 {% block contenido %}
     <h1>Votacion</h1>
     <form method="POST"> {% csrf_token %}
@@ -20,7 +24,7 @@
                                 <h3 class="nombre">{{ participante.nombre }}</h3>
                                 <h4 class="carreras">{{ participante.carreras }}</h4>
                                 <label class="elegir" >Elegir</label>
-                                <input id="reinas" type="radio" name="reinas" title="Elige"
+                                <input class="reynas" id="reinas" type="radio" name="reinas" title="Elige"
                                        value="{{ participante.matricula }}"/>
                             </div>
                             <br/>
